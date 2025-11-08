@@ -40,8 +40,8 @@ const Navbar = () => {
             <span className="text-2xl font-bold text-blue-600">DinaMart</span>
           </Link>
 
-          {/* Search Bar - Desktop */}
-          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-lg mx-8">
+          {/* Search Bar - Tablet and Desktop */}
+          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md lg:max-w-lg mx-4 lg:mx-8">
             <div className="relative w-full">
               <input
                 type="text"
@@ -258,4 +258,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

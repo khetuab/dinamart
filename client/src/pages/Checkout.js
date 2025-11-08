@@ -85,32 +85,32 @@ const Checkout = () => {
       return;
     }
 
-    if (!shippingAddress.region || !shippingAddress.city || !shippingAddress.street) {
+    if (!shippingAddress.region || !shippingAddress.city || !shippingAddress.street || !shippingAddress.houseNumber) {
       toast.error('Please fill in all required address fields');
       return;
     }
 
     setLoading(true);
     try {
-      // const bank = banks.find((b) => b._id === selectedBank);
-      // const orderData = {
-      //   products: cart.map((item) => ({
-      //     productId: item.productId,
-      //     quantity: item.quantity,
-      //   })),
-      //   shippingAddress,
-      //   shippingFee,
-      //   bankUsed: {
-      //     name: bank.bankName,
-      //     accountNumber: bank.accountNumber,
-      //   },
-      //   note,
-      // };
+      const bank = banks.find((b) => b._id === selectedBank);
+      const orderData = {
+        products: cart.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        })),
+        shippingAddress,
+        shippingFee,
+        bankUsed: {
+          name: bank.bankName,
+          accountNumber: bank.accountNumber,
+        },
+        note,
+      };
 
-      //  const _res = await api.post('/orders', orderData);
+      await api.post('/orders', orderData);
       toast.success('Order placed successfully! Please complete the payment.');
       clearCart();
-      navigate('/products');
+      navigate('/my-orders');
     } catch (error) {
       console.error('Error placing order:', error);
       toast.error(error.response?.data?.message || 'Failed to place order');
@@ -129,13 +129,13 @@ const Checkout = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {/* Left Column - Forms */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="md:col-span-2 space-y-6">
           {/* Shipping Address */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Shipping Address</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Shipping Address</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 font-semibold">Label *</label>
                 <input
@@ -222,8 +222,8 @@ const Checkout = () => {
           </div>
 
           {/* Payment Method */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Payment Method</h2>
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Payment Method</h2>
             <p className="text-gray-600 mb-4">
               Please select a bank account and make a transfer. Your order will be verified after payment.
             </p>
@@ -287,8 +287,8 @@ const Checkout = () => {
           </div>
 
           {/* Order Note */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Order Note (Optional)</h2>
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Order Note (Optional)</h2>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
@@ -300,9 +300,9 @@ const Checkout = () => {
         </div>
 
         {/* Right Column - Order Summary */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
-            <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+        <div className="md:col-span-1">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 sticky top-20">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Order Summary</h2>
             <div className="space-y-2 mb-4">
               {cart.map((item) => (
                 <div key={item.productId} className="flex justify-between text-sm">

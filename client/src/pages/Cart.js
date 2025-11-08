@@ -37,14 +37,14 @@ const Cart = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {/* Cart Items */}
-        <div className="lg:col-span-2">
+        <div className="md:col-span-2">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {cart.map((item) => (
               <div
                 key={item.productId}
-                className="border-b last:border-b-0 p-4 flex flex-col sm:flex-row gap-4"
+                className="border-b last:border-b-0 p-4 md:p-6 flex flex-col sm:flex-row gap-4"
               >
                 <img
                   src={item.image || 'https://via.placeholder.com/150'}
@@ -98,9 +98,9 @@ const Cart = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
-            <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+        <div className="md:col-span-1">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-6 sticky top-20">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Order Summary</h2>
             <div className="space-y-2 mb-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
@@ -135,4 +135,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
 

@@ -59,9 +59,59 @@ const AdminOrders = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold mb-8">Manage Orders</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Manage Orders</h1>
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      {/* Tablet and Mobile Card Layout */}
+      <div className="lg:hidden space-y-4">
+        {orders.map((order) => (
+          <div key={order._id} className="bg-white rounded-lg shadow-md p-4 md:p-6">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="font-semibold text-gray-900">Order #{order._id.slice(-8)}</h3>
+                <p className="text-sm text-gray-600 mt-1">{order.userId?.name || 'N/A'}</p>
+                <p className="text-xs text-gray-500">{order.userId?.email || 'N/A'}</p>
+              </div>
+              <div className="text-right">
+                <p className="font-bold text-gray-900">ETB {order.grandTotal}</p>
+                <p className="text-xs text-gray-500">{order.products.length} item(s)</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.paymentStatus)}`}>
+                Payment: {order.paymentStatus}
+              </span>
+              <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.orderStatus)}`}>
+                Status: {order.orderStatus}
+              </span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              {order.paymentStatus === 'pending' && (
+                <button
+                  onClick={() => updateOrderStatus(order._id, 'paid', order.orderStatus)}
+                  className="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center justify-center text-sm"
+                >
+                  <FiCheck className="mr-1" />
+                  Mark Paid
+                </button>
+              )}
+              <select
+                value={order.orderStatus}
+                onChange={(e) => updateOrderStatus(order._id, order.paymentStatus, e.target.value)}
+                className="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table Layout */}
+      <div className="hidden lg:block bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -148,4 +198,5 @@ const AdminOrders = () => {
 };
 
 export default AdminOrders;
+
 

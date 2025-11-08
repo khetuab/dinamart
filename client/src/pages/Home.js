@@ -131,8 +131,8 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Desktop Grid - 4 columns */}
-              <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Tablet and Desktop Grid - 2 columns on tablet, 4 on desktop */}
+              <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {featuredProducts.map((product) => (
                   <Link
                     key={product._id}

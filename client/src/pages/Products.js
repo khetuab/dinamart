@@ -73,7 +73,7 @@ const Products = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Mobile Filter Button */}
-      <div className="lg:hidden mb-4">
+      <div className="md:hidden mb-4">
         <button
           onClick={() => setShowMobileFilters(!showMobileFilters)}
           className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 flex items-center justify-center gap-2 font-semibold"
@@ -83,10 +83,10 @@ const Products = () => {
         </button>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Sidebar Filters - Desktop */}
-        <aside className="hidden lg:block lg:w-64">
-          <div className="bg-white p-6 rounded-lg shadow-md sticky top-20">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+        {/* Sidebar Filters - Tablet and Desktop */}
+        <aside className="hidden md:block md:w-56 lg:w-64">
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md sticky top-20">
             <h3 className="font-bold text-lg mb-4">Filters</h3>
 
             {/* Categories */}
@@ -140,7 +140,7 @@ const Products = () => {
 
         {/* Mobile Filters */}
         {showMobileFilters && (
-          <div className="lg:hidden bg-white p-4 rounded-lg shadow-md mb-4">
+          <div className="md:hidden bg-white p-4 rounded-lg shadow-md mb-4">
             <div className="mb-6">
               <h4 className="font-semibold mb-3">Categories</h4>
               <div className="grid grid-cols-2 gap-2">
@@ -209,7 +209,7 @@ const Products = () => {
           ) : (
             <>
               {/* Mobile Grid - 2 columns */}
-              <div className="lg:hidden">
+              <div className="md:hidden">
                 <div className="grid grid-cols-2 gap-3">
                   {products.map((product) => (
                     <div
@@ -266,8 +266,8 @@ const Products = () => {
                 </div>
               </div>
 
-              {/* Desktop Grid - 3 columns */}
-              <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Tablet and Desktop Grid - 3 columns on tablet, 3 on desktop */}
+              <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {products.map((product) => (
                   <div
                     key={product._id}
