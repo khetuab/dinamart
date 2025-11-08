@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- ✅ Browser tab icon -->
+    <link rel="icon" href="%PUBLIC_URL%/dinamartt.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="DinaMart - Professional E-commerce Website"
+    />
+
+    <!-- ✅ Apple devices icon -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/dinamartt.png" />
+
+    <!-- ✅ PWA manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>DinaMart</title>
+
+    <!-- ✅ Optional: add a small preload style for your logo (loading screen) -->
+    <style>
+      #startup-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: white;
+      }
+      #startup-logo img {
+        width: 120px;
+        height: auto;
+        animation: fadeIn 1s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- ✅ Logo shown while React is loading -->
+    <div id="startup-logo">
+      <img src="%PUBLIC_URL%/logo.png" alt="DinaMart Logo" />
+    </div>
+
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!-- ✅ Script to hide logo once app loads -->
+    <script>
+      window.addEventListener("load", () => {
+        const logo = document.getElementById("startup-logo");
+        if (logo) logo.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
